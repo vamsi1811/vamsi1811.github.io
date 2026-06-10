@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Projects — Vamsi Hanumanthu</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .projects-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.5rem; }
+    .proj-card {
+      background:var(--glass-bg); backdrop-filter:var(--glass-blur);
+      border:1px solid var(--glass-border); border-radius:var(--radius);
+      overflow:hidden; display:flex; flex-direction:column;
+      box-shadow:var(--glass-shadow);
+      transition: all var(--transition-bounce);
+      position:relative;
+    }
+    /* Glow border on hover */
+    .proj-card::after {
+      content:''; position:absolute; inset:-1px; border-radius:var(--radius);
+      background: linear-gradient(135deg, rgba(79,142,247,0), rgba(79,142,247,0.6), rgba(240,192,96,0.4), rgba(79,142,247,0));
+      opacity:0; transition:opacity var(--transition);
+      z-index:-1;
+    }
+    .proj-card:hover { transform:translateY(-10px) scale(1.02); box-shadow:var(--glass-shadow-hover); }
+    .proj-card:hover::after { opacity:1; }
+
+    .proj-thumb {
+      height:185px; position:relative; overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .proj-thumb-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.4));
+    }
+    .proj-thumb svg { width:64px; height:64px; transition:transform 0.5s ease; }
+    .proj-card:hover .proj-thumb svg { transform:scale(1.15) rotate(-5deg); }
+    .proj-label {
+      position:absolute; bottom:12px; left:12px;
+      font-family:'JetBrains Mono',monospace; font-size:.68rem;
+      background:rgba(0,0,0,0.5); backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:6px; padding:3px 9px;
+    }
+    .feat-badge {
+      position:absolute; top:12px; right:12px;
+      font-size:.68rem; font-weight:700;
+      background:linear-gradient(135deg,var(--accent),var(--gold));
+      color:#fff; border-radius:6px; padding:3px 10px;
+      box-shadow:0 2px 10px rgba(79,142,247,0.4);
+    }
+    .proj-body { padding:1.5rem; flex:1; display:flex; flex-direction:column; }
+    .proj-title { font-family:'Syne',sans-serif; font-weight:700; font-size:1.1rem; margin-bottom:.5rem; }
+    .proj-desc { font-size:.88rem; color:var(--muted); line-height:1.72; flex:1; margin-bottom:1rem; }
+    .proj-bullets { margin-bottom:1rem; display:flex; flex-direction:column; gap:.35rem; }
+    .proj-bullets li { font-size:.82rem; color:var(--muted); display:flex; gap:.5rem; }
+    .proj-bullets li::before { content:'▸'; color:var(--accent); flex-shrink:0; }
+    .proj-tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1.1rem; }
+    .proj-tag {
+      font-family:'JetBrains Mono',monospace; font-size:.68rem;
+      background:rgba(79,142,247,0.08); backdrop-filter:blur(8px);
+      border:1px solid rgba(79,142,247,0.18); border-radius:6px;
+      padding:3px 9px; color:var(--accent2);
+      transition:all var(--transition);
+    }
+    .proj-tag:hover { background:rgba(79,142,247,0.2); transform:translateY(-2px); }
+    .proj-links { display:flex; gap:.85rem; border-top:1px solid rgba(255,255,255,0.07); padding-top:1rem; margin-top:auto; }
+    .proj-link { display:inline-flex; align-items:center; gap:5px; font-size:.8rem; font-weight:600; color:var(--muted); transition:all var(--transition-bounce); }
+    .proj-link:hover { color:var(--accent); transform:translateY(-2px); }
+    .proj-link svg { width:14px; height:14px; }
+  </style>
+</head>
+<body>
+<div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+<nav>
+  <a href="index.html" class="nav-logo">VH.</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+    <li><a href="skills.html">Skills</a></li><li><a href="experience.html">Experience</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li><li><a href="education.html">Education</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" id="theme-toggle">☀ Light</button>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="page">
+  <div class="page-banner">
+    <div class="page-banner-inner">
+      <div class="page-label reveal">What I've Built</div>
+      <h1 class="page-title reveal d1">Projects</h1>
+      <p class="page-subtitle reveal d2">A selection of work showcasing my technical skills and problem-solving approach.</p>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="section-divider reveal"></div>
+    <div class="projects-grid">
+      <div class="proj-card reveal">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#060f20,#0c1a3a,#101f50);">
+          <div class="proj-thumb-overlay"></div>
+          <span class="feat-badge">Featured</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(79,142,247,0.6)" stroke-width="1.2">
+            <rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/>
+            <line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/>
+            <line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/>
+            <line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+          </svg>
+          <span class="proj-label" style="color:var(--accent2);">Movie View Application</span>
+        </div>
+        <div class="proj-body">
+          <h3 class="proj-title">Movie View Application</h3>
+          <p class="proj-desc">Dynamic movie browsing app powered by the TMDB API with multiple view modes, real-time data, and fully responsive layout.</p>
+          <ul class="proj-bullets">
+            <li>Card, Table & List views with seamless switching</li>
+            <li>Pagination with dynamic page rendering</li>
+            <li>Real-time API data with loading states</li>
+            <li>Responsive across mobile, tablet & desktop</li>
+          </ul>
+          <div class="proj-tags">
+            <span class="proj-tag">HTML</span><span class="proj-tag">CSS</span>
+            <span class="proj-tag">JavaScript</span><span class="proj-tag">TMDB API</span>
+          </div>
+          <div class="proj-links">
+            <a href="#" class="proj-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>GitHub</a>
+            <a href="#" class="proj-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Live Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal d1">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#071510,#0f2418,#162e20);">
+          <div class="proj-thumb-overlay"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(80,200,100,0.6)" stroke-width="1.2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span class="proj-label" style="color:#90EEA0;">Personal Portfolio</span>
+        </div>
+        <div class="proj-body">
+          <h3 class="proj-title">Personal Portfolio Website</h3>
+          <p class="proj-desc">Fully responsive multi-page portfolio with glassmorphism design, dark/light mode, animations, and interactive contact form.</p>
+          <ul class="proj-bullets">
+            <li>Dark/light mode with localStorage persistence</li>
+            <li>Scroll-reveal animations and typing effect</li>
+            <li>Multi-page architecture with consistent nav</li>
+            <li>Glassmorphism UI with hover animations</li>
+          </ul>
+          <div class="proj-tags">
+            <span class="proj-tag">HTML</span><span class="proj-tag">CSS</span><span class="proj-tag">JavaScript</span>
+          </div>
+          <div class="proj-links">
+            <a href="#" class="proj-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>GitHub</a>
+            <a href="#" class="proj-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Live Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal d2">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#110820,#1e0d38,#280f48);">
+          <div class="proj-thumb-overlay"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(167,139,250,0.6)" stroke-width="1.2">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          <span class="proj-label" style="color:#C084FC;">React UI Library</span>
+        </div>
+        <div class="proj-body">
+          <h3 class="proj-title">React UI Component Library</h3>
+          <p class="proj-desc">Reusable React components built during internship for consistent, maintainable UIs across a large-scale admin application.</p>
+          <ul class="proj-bullets">
+            <li>Data tables with sorting, filtering, pagination</li>
+            <li>Modal dialogs, dropdowns, form controls</li>
+            <li>Shared design tokens & CSS conventions</li>
+          </ul>
+          <div class="proj-tags">
+            <span class="proj-tag">React</span><span class="proj-tag">TypeScript</span><span class="proj-tag">CSS</span>
+          </div>
+          <div class="proj-links">
+            <a href="#" class="proj-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>GitHub</a>
+            <a href="#" class="proj-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Live Demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="footer-socials">
+    <a href="https://github.com/vamsihanumanthu" target="_blank" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
+    <a href="https://linkedin.com/in/vamsihanumanthu" target="_blank" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+    <a href="mailto:vamsi@example.com" class="social-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+  </div>
+  <p class="footer-text">Built by <span class="footer-name">Vamsi Hanumanthu</span> · Thank you for visiting.</p>
+</footer>
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="18 15 12 9 6 15"/></svg></button>
+<script>
+  const _h=document.documentElement,_s=localStorage.getItem('vh-theme')||'dark';
+  _h.setAttribute('data-theme',_s);const _tb=document.getElementById('theme-toggle');
+  _tb.textContent=_s==='dark'?'☀ Light':'🌙 Dark';
+  _tb.addEventListener('click',()=>{const n=_h.getAttribute('data-theme')==='dark'?'light':'dark';_h.setAttribute('data-theme',n);localStorage.setItem('vh-theme',n);_tb.textContent=n==='dark'?'☀ Light':'🌙 Dark';});
+  document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('nav-links').classList.toggle('open'));
+  const _btt=document.getElementById('back-to-top');
+  window.addEventListener('scroll',()=>_btt.classList.toggle('visible',window.scrollY>300));
+  const ro=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>

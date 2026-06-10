@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>About — Vamsi Hanumanthu</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .about-grid { display: grid; grid-template-columns: 1fr 1.45fr; gap: 4rem; align-items: start; }
+    .about-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    .stat-box {
+      background: var(--glass-bg); backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border); border-radius: var(--radius);
+      padding: 1.4rem; text-align: center;
+      box-shadow: var(--glass-shadow);
+      transition: all var(--transition-bounce);
+      position: relative; overflow: hidden;
+    }
+    .stat-box::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(79,142,247,0.08), transparent);
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .stat-box:hover { transform: translateY(-6px) scale(1.04); border-color: rgba(79,142,247,0.4); box-shadow: var(--glass-shadow-hover); }
+    .stat-box:hover::after { opacity: 1; }
+    .stat-num {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2rem;
+      background: linear-gradient(135deg, var(--accent), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: 0.73rem; color: var(--muted); margin-top: 3px; }
+    .code-block {
+      background: var(--glass-bg); backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border); border-radius: var(--radius);
+      padding: 1.5rem; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem; line-height: 1.9; box-shadow: var(--glass-shadow);
+      transition: all var(--transition);
+    }
+    .code-block:hover { border-color: rgba(79,142,247,0.3); box-shadow: var(--glass-shadow-hover); }
+    .cm { color: var(--muted); } .ck { color: #7CB3FF; } .cs { color: var(--gold); } .cb { color: #4F8EF7; }
+    .about-text p { color: var(--muted); line-height: 1.88; margin-bottom: 1.25rem; font-size: 1.02rem; }
+    .hl { color: var(--accent2); font-weight: 500; }
+    .interests-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px,1fr)); gap: 0.85rem; margin-top: 2.5rem; }
+    .interest-card {
+      background: var(--glass-bg); backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border); border-radius: var(--radius);
+      padding: 1.1rem; display: flex; align-items: center; gap: 0.75rem;
+      box-shadow: var(--glass-shadow); transition: all var(--transition-bounce);
+    }
+    .interest-card:hover { transform: translateY(-5px) scale(1.03); border-color: rgba(79,142,247,0.4); box-shadow: var(--glass-shadow-hover); }
+    .interest-card:hover .i-icon { transform: scale(1.25) rotate(-8deg); }
+    .i-icon { font-size: 1.35rem; flex-shrink: 0; transition: transform var(--transition-bounce); }
+    .i-label { font-size: 0.85rem; font-weight: 500; }
+    @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+<nav>
+  <a href="index.html" class="nav-logo">VH.</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="about.html" class="active">About</a></li>
+    <li><a href="skills.html">Skills</a></li><li><a href="experience.html">Experience</a></li>
+    <li><a href="projects.html">Projects</a></li><li><a href="education.html">Education</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" id="theme-toggle">☀ Light</button>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="page">
+  <div class="page-banner">
+    <div class="page-banner-inner">
+      <div class="page-label reveal">Who I Am</div>
+      <h1 class="page-title reveal d1">About Me</h1>
+      <p class="page-subtitle reveal d2">A passionate IT student building real-world solutions through code.</p>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="about-grid">
+      <div class="about-sidebar">
+        <div class="stat-grid">
+          <div class="stat-box reveal"><div class="stat-num">2+</div><div class="stat-label">Years Learning</div></div>
+          <div class="stat-box reveal d1"><div class="stat-num">5+</div><div class="stat-label">Projects Built</div></div>
+          <div class="stat-box reveal d2"><div class="stat-num">1</div><div class="stat-label">Internship</div></div>
+          <div class="stat-box reveal d3"><div class="stat-num">7+</div><div class="stat-label">Technologies</div></div>
+        </div>
+        <div class="code-block reveal d2">
+          <span class="cm">// current_status.js</span><br>
+          <span class="ck">const</span> vamsi = {<br>
+          &nbsp;&nbsp;role: <span class="cs">"IT Student"</span>,<br>
+          &nbsp;&nbsp;university: <span class="cs">"JBIET"</span>,<br>
+          &nbsp;&nbsp;year: <span class="cb">2026</span>,<br>
+          &nbsp;&nbsp;seeking: <span class="cs">"Opportunities"</span>,<br>
+          &nbsp;&nbsp;openToWork: <span class="cb">true</span>,<br>
+          &nbsp;&nbsp;location: <span class="cs">"Hyderabad 🇮🇳"</span><br>
+          };
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-divider reveal"></div>
+        <p class="reveal">I'm <span class="hl">Vamsi Hanumanthu</span>, an Information Technology student at J.B. Institute of Engineering & Technology, passionate about crafting digital experiences that are both functional and delightful to use.</p>
+        <p class="reveal d1">My journey into software development started with curiosity — a desire to understand how the apps and websites I used every day were actually built. That curiosity quickly became a <span class="hl">genuine passion</span> for front-end development, API integration, and clean UI design.</p>
+        <p class="reveal d2">During my internship at <span class="hl">Truezenix Technologies</span>, I got hands-on experience building production-grade React applications, working with real APIs, collaborating in an agile team, and shipping features that real users interact with.</p>
+        <p class="reveal d3">My goal is to secure a role where I can <span class="hl">grow, contribute meaningfully</span>, and collaborate with a team that values clean code, good design, and impact-driven development.</p>
+      </div>
+    </div>
+    <h2 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.4rem;margin-top:3.5rem;" class="reveal">Interests & Values</h2>
+    <div class="section-divider reveal"></div>
+    <div class="interests-grid">
+      <div class="interest-card reveal"><span class="i-icon">🎨</span><span class="i-label">UI/UX Design</span></div>
+      <div class="interest-card reveal d1"><span class="i-icon">⚙️</span><span class="i-label">Clean Code</span></div>
+      <div class="interest-card reveal d2"><span class="i-icon">🌐</span><span class="i-label">Open Source</span></div>
+      <div class="interest-card reveal d3"><span class="i-icon">📱</span><span class="i-label">Responsive Design</span></div>
+      <div class="interest-card reveal d4"><span class="i-icon">🤖</span><span class="i-label">AI & Tech</span></div>
+      <div class="interest-card reveal"><span class="i-icon">📚</span><span class="i-label">Self-learning</span></div>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="footer-socials">
+    <a href="https://github.com/vamsihanumanthu" target="_blank" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
+    <a href="https://linkedin.com/in/vamsihanumanthu" target="_blank" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+    <a href="mailto:vamsi@example.com" class="social-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+  </div>
+  <p class="footer-text">Built by <span class="footer-name">Vamsi Hanumanthu</span> · Thank you for visiting.</p>
+</footer>
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="18 15 12 9 6 15"/></svg></button>
+<script>
+  const _h=document.documentElement,_s=localStorage.getItem('vh-theme')||'dark';
+  _h.setAttribute('data-theme',_s);const _tb=document.getElementById('theme-toggle');
+  _tb.textContent=_s==='dark'?'☀ Light':'🌙 Dark';
+  _tb.addEventListener('click',()=>{const n=_h.getAttribute('data-theme')==='dark'?'light':'dark';_h.setAttribute('data-theme',n);localStorage.setItem('vh-theme',n);_tb.textContent=n==='dark'?'☀ Light':'🌙 Dark';});
+  document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('nav-links').classList.toggle('open'));
+  const _btt=document.getElementById('back-to-top');
+  window.addEventListener('scroll',()=>_btt.classList.toggle('visible',window.scrollY>300));
+  const ro=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
