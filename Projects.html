@@ -95,7 +95,7 @@
   <div class="page-content">
     <div class="section-divider reveal"></div>
     <div class="projects-grid">
-      <div class="proj-card reveal">
+      <div class="proj-card reveal" data-parallax="0.05">
         <div class="proj-thumb" style="background:linear-gradient(135deg,#060f20,#0c1a3a,#101f50);">
           <div class="proj-thumb-overlay"></div>
           <span class="feat-badge">Featured</span>
@@ -127,7 +127,7 @@
         </div>
       </div>
 
-      <div class="proj-card reveal d1">
+      <div class="proj-card reveal d1" data-parallax="0.08">
         <div class="proj-thumb" style="background:linear-gradient(135deg,#071510,#0f2418,#162e20);">
           <div class="proj-thumb-overlay"></div>
           <svg viewBox="0 0 24 24" fill="none" stroke="rgba(80,200,100,0.6)" stroke-width="1.2">
@@ -154,7 +154,7 @@
         </div>
       </div>
 
-      <div class="proj-card reveal d2">
+      <div class="proj-card reveal d2" data-parallax="0.06">
         <div class="proj-thumb" style="background:linear-gradient(135deg,#110820,#1e0d38,#280f48);">
           <div class="proj-thumb-overlay"></div>
           <svg viewBox="0 0 24 24" fill="none" stroke="rgba(167,139,250,0.6)" stroke-width="1.2">
@@ -203,5 +203,6 @@
   const ro=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 </script>
+<script src="parallax.js"></script>
 </body>
 </html>

@@ -133,7 +133,7 @@
         </div>
       </div>
       <div class="exp-sidebar">
-        <div class="side-card reveal d1">
+        <div class="side-card reveal d1" data-parallax="0.05">
           <h4>Technologies Used</h4>
           <div class="tech-tags">
             <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span>
@@ -142,7 +142,7 @@
             <span class="tech-tag">Figma</span><span class="tech-tag">VS Code</span>
           </div>
         </div>
-        <div class="side-card reveal d2">
+        <div class="side-card reveal d2" data-parallax="0.07">
           <h4>Key Achievements</h4>
           <div class="impact-list">
             <div class="impact-item">Shipped production React features</div>
@@ -152,7 +152,7 @@
             <div class="impact-item">Improved page load performance</div>
           </div>
         </div>
-        <div class="side-card reveal d3">
+        <div class="side-card reveal d3" data-parallax="0.04">
           <h4>About Truezenix</h4>
           <p style="font-size:.83rem;color:var(--muted);line-height:1.7;">Truezenix Technologies is a software solutions company specialising in enterprise web applications and digital transformation products.</p>
         </div>
@@ -180,5 +180,6 @@
   const ro=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 </script>
+<script src="parallax.js"></script>
 </body>
 </html>

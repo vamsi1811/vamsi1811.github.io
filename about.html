@@ -81,12 +81,12 @@
     <div class="about-grid">
       <div class="about-sidebar">
         <div class="stat-grid">
-          <div class="stat-box reveal"><div class="stat-num">2+</div><div class="stat-label">Years Learning</div></div>
-          <div class="stat-box reveal d1"><div class="stat-num">5+</div><div class="stat-label">Projects Built</div></div>
-          <div class="stat-box reveal d2"><div class="stat-num">1</div><div class="stat-label">Internship</div></div>
-          <div class="stat-box reveal d3"><div class="stat-num">7+</div><div class="stat-label">Technologies</div></div>
+          <div class="stat-box reveal" data-parallax="0.05"><div class="stat-num">2+</div><div class="stat-label">Years Learning</div></div>
+          <div class="stat-box reveal d1" data-parallax="0.07"><div class="stat-num">5+</div><div class="stat-label">Projects Built</div></div>
+          <div class="stat-box reveal d2" data-parallax="0.04"><div class="stat-num">1</div><div class="stat-label">Internship</div></div>
+          <div class="stat-box reveal d3" data-parallax="0.09"><div class="stat-num">7+</div><div class="stat-label">Technologies</div></div>
         </div>
-        <div class="code-block reveal d2">
+        <div class="code-block reveal d2" data-parallax="0.04">
           <span class="cm">// current_status.js</span><br>
           <span class="ck">const</span> vamsi = {<br>
           &nbsp;&nbsp;role: <span class="cs">"IT Student"</span>,<br>
@@ -109,7 +109,7 @@
     <h2 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.4rem;margin-top:3.5rem;" class="reveal">Interests & Values</h2>
     <div class="section-divider reveal"></div>
     <div class="interests-grid">
-      <div class="interest-card reveal"><span class="i-icon">🎨</span><span class="i-label">UI/UX Design</span></div>
+      <div class="interest-card reveal" data-parallax="0.06"><span class="i-icon">🎨</span><span class="i-label">UI/UX Design</span></div>
       <div class="interest-card reveal d1"><span class="i-icon">⚙️</span><span class="i-label">Clean Code</span></div>
       <div class="interest-card reveal d2"><span class="i-icon">🌐</span><span class="i-label">Open Source</span></div>
       <div class="interest-card reveal d3"><span class="i-icon">📱</span><span class="i-label">Responsive Design</span></div>
@@ -138,5 +138,6 @@
   const ro=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 </script>
+<script src="parallax.js"></script>
 </body>
 </html>

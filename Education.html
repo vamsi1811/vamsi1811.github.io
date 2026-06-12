@@ -85,7 +85,7 @@
   <div class="page-content">
     <h2 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.4rem;" class="reveal">Formal Education</h2>
     <div class="section-divider reveal"></div>
-    <div class="edu-card reveal">
+    <div class="edu-card reveal" data-parallax="0.04">
       <div class="edu-icon">🎓</div>
       <div>
         <div class="edu-degree">Bachelor of Technology — Information Technology</div>
@@ -96,11 +96,11 @@
     <h2 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.4rem;margin-top:3rem;" class="reveal">Certifications</h2>
     <div class="section-divider reveal"></div>
     <div class="certs-grid">
-      <div class="cert-card reveal"><span class="c-icon">🌐</span><div class="c-name">Responsive Web Design</div><div class="c-issuer">freeCodeCamp</div><span class="c-badge">Completed</span></div>
-      <div class="cert-card reveal d1"><span class="c-icon">⚛</span><div class="c-name">React — The Complete Guide</div><div class="c-issuer">Udemy</div><span class="c-badge">Completed</span></div>
-      <div class="cert-card reveal d2"><span class="c-icon">☕</span><div class="c-name">Java Programming Masterclass</div><div class="c-issuer">Udemy</div><span class="c-badge">Completed</span></div>
-      <div class="cert-card reveal d3"><span class="c-icon">🐍</span><div class="c-name">Python for Everybody</div><div class="c-issuer">Coursera</div><span class="c-badge">Completed</span></div>
-      <div class="cert-card reveal d4"><span class="c-icon">🗄</span><div class="c-name">SQL & Database Design</div><div class="c-issuer">LinkedIn Learning</div><span class="c-badge">Completed</span></div>
+      <div class="cert-card reveal" data-parallax="0.05"><span class="c-icon">🌐</span><div class="c-name">Responsive Web Design</div><div class="c-issuer">freeCodeCamp</div><span class="c-badge">Completed</span></div>
+      <div class="cert-card reveal d1" data-parallax="0.07"><span class="c-icon">⚛</span><div class="c-name">React — The Complete Guide</div><div class="c-issuer">Udemy</div><span class="c-badge">Completed</span></div>
+      <div class="cert-card reveal d2" data-parallax="0.04"><span class="c-icon">☕</span><div class="c-name">Java Programming Masterclass</div><div class="c-issuer">Udemy</div><span class="c-badge">Completed</span></div>
+      <div class="cert-card reveal d3" data-parallax="0.09"><span class="c-icon">🐍</span><div class="c-name">Python for Everybody</div><div class="c-issuer">Coursera</div><span class="c-badge">Completed</span></div>
+      <div class="cert-card reveal d4" data-parallax="0.06"><span class="c-icon">🗄</span><div class="c-name">SQL & Database Design</div><div class="c-issuer">LinkedIn Learning</div><span class="c-badge">Completed</span></div>
       <div class="cert-card reveal"><span class="c-icon">🎨</span><div class="c-name">UI/UX Design Fundamentals</div><div class="c-issuer">Google</div><span class="c-badge">Completed</span></div>
     </div>
   </div>
@@ -125,5 +125,6 @@
   const ro=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 </script>
+<script src="parallax.js"></script>
 </body>
 </html>

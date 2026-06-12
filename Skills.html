@@ -5,63 +5,209 @@
   <title>Skills — Vamsi Hanumanthu</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    .skills-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; }
-    .group-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--accent2); margin-bottom: 1.5rem; }
-    .skill-item { margin-bottom: 1.5rem; }
-    .skill-top { display: flex; justify-content: space-between; margin-bottom: 8px; }
-    .skill-name { font-weight: 500; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
-    .skill-pct { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--accent); }
-    .skill-bar {
-      height: 8px; border-radius: 4px; overflow: hidden;
-      background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.07);
-    }
-    .skill-fill {
-      height: 100%; border-radius: 4px; width: 0;
-      background: linear-gradient(90deg, var(--accent), var(--purple), var(--gold));
-      background-size: 200% 100%;
-      transition: width 1.4s cubic-bezier(0.4,0,0.2,1);
-      box-shadow: 0 0 10px rgba(79,142,247,0.4);
-      animation: shimmerBar 3s ease infinite;
-    }
-    @keyframes shimmerBar { 0%{background-position:0% 0%} 100%{background-position:200% 0%} }
 
-    .soft-grid { display: flex; flex-direction: column; gap: 0.85rem; }
-    .soft-card {
-      background: var(--glass-bg); backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--glass-border); border-radius: var(--radius);
-      padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem;
-      box-shadow: var(--glass-shadow); transition: all var(--transition-bounce);
+    /* ═══════════════════════════════════════════
+       TECHNICAL SKILL CARDS  (matches screenshot)
+       ═══════════════════════════════════════════ */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 4rem;
     }
-    .soft-card:hover { transform: translateX(8px) scale(1.02); border-color: rgba(79,142,247,0.4); box-shadow: var(--glass-shadow-hover); }
-    .soft-card:hover .s-icon { transform: scale(1.3) rotate(-8deg); }
-    .s-icon { font-size: 1.4rem; flex-shrink: 0; transition: transform var(--transition-bounce); }
-    .s-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 2px; }
-    .s-desc { font-size: 0.78rem; color: var(--muted); }
 
-    .tools-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px,1fr)); gap: 1rem; margin-top: 3.5rem; }
+    .skill-card {
+      position: relative;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 20px;
+      padding: 2.25rem 1.5rem 2rem;
+      text-align: center;
+      cursor: default;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07);
+    }
+
+    /* Glow spot that follows the card's accent colour */
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%,
+        var(--card-glow, rgba(79,142,247,0.18)) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    /* Shimmer sweep */
+    .skill-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%; width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+      transition: left 0.65s ease;
+      pointer-events: none;
+    }
+
+    .skill-card:hover::before  { opacity: 1; }
+    .skill-card:hover::after   { left: 140%; }
+    .skill-card:hover {
+      transform: translateY(-10px) scale(1.04);
+      border-color: var(--card-border, rgba(79,142,247,0.45));
+      box-shadow:
+        0 24px 60px rgba(0,0,0,0.55),
+        0 0 40px var(--card-glow, rgba(79,142,247,0.18)),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+
+    /* Icon wrapper */
+    .sk-icon-wrap {
+      width: 80px; height: 80px;
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.2rem;
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      position: relative; z-index: 1;
+    }
+    .skill-card:hover .sk-icon-wrap {
+      transform: scale(1.12) rotate(-4deg);
+    }
+    .sk-icon-wrap svg,
+    .sk-icon-wrap img { width: 52px; height: 52px; }
+
+    /* Text */
+    .sk-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1.05rem;
+      color: var(--white);
+      margin-bottom: 0.35rem;
+      position: relative; z-index: 1;
+    }
+    .sk-divider {
+      width: 28px; height: 2px; border-radius: 2px;
+      background: var(--card-accent, var(--accent));
+      margin: 0 auto 0.6rem;
+      transition: width 0.4s ease;
+    }
+    .skill-card:hover .sk-divider { width: 48px; }
+    .sk-desc {
+      font-size: 0.82rem; color: var(--muted);
+      line-height: 1.55;
+      position: relative; z-index: 1;
+    }
+
+    /* ─── Per-card colour themes ─── */
+    /* HTML */
+    .sk-html { --card-glow: rgba(227,79,38,0.2); --card-border: rgba(227,79,38,0.45); --card-accent: #E34F26; }
+    .sk-html .sk-icon-wrap { background: rgba(227,79,38,0.12); border: 1px solid rgba(227,79,38,0.2); }
+
+    /* CSS */
+    .sk-css { --card-glow: rgba(38,77,228,0.22); --card-border: rgba(38,77,228,0.45); --card-accent: #264DE4; }
+    .sk-css .sk-icon-wrap { background: rgba(38,77,228,0.12); border: 1px solid rgba(38,77,228,0.2); }
+
+    /* JS */
+    .sk-js { --card-glow: rgba(240,219,79,0.2); --card-border: rgba(240,219,79,0.4); --card-accent: #F0DB4F; }
+    .sk-js .sk-icon-wrap { background: rgba(240,219,79,0.1); border: 1px solid rgba(240,219,79,0.2); }
+
+    /* React */
+    .sk-react { --card-glow: rgba(97,218,251,0.18); --card-border: rgba(97,218,251,0.4); --card-accent: #61DAFB; }
+    .sk-react .sk-icon-wrap { background: rgba(97,218,251,0.08); border: 1px solid rgba(97,218,251,0.18); }
+
+    /* Java */
+    .sk-java { --card-glow: rgba(240,52,52,0.18); --card-border: rgba(240,52,52,0.4); --card-accent: #f07800; }
+    .sk-java .sk-icon-wrap { background: rgba(240,120,0,0.1); border: 1px solid rgba(240,120,0,0.2); }
+
+    /* Python */
+    .sk-python { --card-glow: rgba(55,118,171,0.2); --card-border: rgba(55,118,171,0.45); --card-accent: #FFD43B; }
+    .sk-python .sk-icon-wrap { background: rgba(55,118,171,0.12); border: 1px solid rgba(55,118,171,0.2); }
+
+    /* DB */
+    .sk-db { --card-glow: rgba(139,92,246,0.2); --card-border: rgba(139,92,246,0.45); --card-accent: #A78BFA; }
+    .sk-db .sk-icon-wrap { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.2); }
+
+    /* Git */
+    .sk-git { --card-glow: rgba(240,80,50,0.2); --card-border: rgba(240,80,50,0.4); --card-accent: #F05133; }
+    .sk-git .sk-icon-wrap { background: rgba(240,80,50,0.1); border: 1px solid rgba(240,80,50,0.2); }
+
+    /* ═══════════════════════════════════════════
+       SOFT SKILLS — pill tags row
+       ═══════════════════════════════════════════ */
+    .soft-section-title {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1.4rem; margin-bottom: 0.5rem;
+    }
+    .soft-pills {
+      display: flex; flex-wrap: wrap; gap: 0.85rem;
+      margin-top: 0.5rem;
+    }
+    .soft-pill {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50px;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.88rem; font-weight: 500; color: var(--muted);
+      transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      cursor: default;
+    }
+    .soft-pill .sp-icon { font-size: 1.1rem; transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+    .soft-pill:hover {
+      border-color: rgba(79,142,247,0.45);
+      color: var(--accent2);
+      background: rgba(79,142,247,0.09);
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 8px 24px rgba(79,142,247,0.2);
+    }
+    .soft-pill:hover .sp-icon { transform: scale(1.3) rotate(-8deg); }
+
+    /* ═══════════════════════════════════════════
+       TOOLS strip — unchanged
+       ═══════════════════════════════════════════ */
+    .tools-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px,1fr));
+      gap: 1rem; margin-top: 0.5rem;
+    }
     .tool-pill {
-      background: var(--glass-bg); backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--glass-border); border-radius: var(--radius);
-      padding: 1.1rem; text-align: center; box-shadow: var(--glass-shadow);
-      transition: all var(--transition-bounce); cursor: default;
+      background: rgba(255,255,255,0.04); backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.09); border-radius: var(--radius);
+      padding: 1.1rem; text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); cursor: default;
     }
-    .tool-pill:hover { transform: translateY(-7px) scale(1.06); border-color: rgba(79,142,247,0.4); box-shadow: var(--glass-shadow-hover); }
+    .tool-pill:hover {
+      transform: translateY(-7px) scale(1.07);
+      border-color: rgba(79,142,247,0.45);
+      box-shadow: 0 16px 40px rgba(79,142,247,0.2);
+    }
     .tool-pill:hover .tp-icon { transform: scale(1.2) rotate(-10deg); }
-    .tp-icon { font-size: 1.7rem; margin-bottom: 0.4rem; transition: transform var(--transition-bounce); display: block; }
+    .tp-icon { font-size: 1.7rem; margin-bottom: 0.4rem; display: block; transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1); }
     .tp-name { font-size: 0.73rem; font-weight: 600; color: var(--muted); }
-    @media (max-width: 860px) { .skills-layout { grid-template-columns: 1fr; } }
+
+    /* Responsive */
+    @media (max-width: 900px) { .tech-grid { grid-template-columns: repeat(3,1fr); } }
+    @media (max-width: 640px) { .tech-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 380px) { .tech-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; } }
   </style>
 </head>
 <body>
 <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+
 <nav>
   <a href="index.html" class="nav-logo">VH.</a>
   <ul class="nav-links" id="nav-links">
-    <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
-    <li><a href="skills.html" class="active">Skills</a></li><li><a href="experience.html">Experience</a></li>
-    <li><a href="projects.html">Projects</a></li><li><a href="education.html">Education</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="skills.html" class="active">Skills</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="education.html">Education</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-right">
@@ -69,6 +215,7 @@
     <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
   </div>
 </nav>
+
 <div class="page">
   <div class="page-banner">
     <div class="page-banner-inner">
@@ -77,70 +224,223 @@
       <p class="page-subtitle reveal d2">The technical and interpersonal tools I bring to every project.</p>
     </div>
   </div>
+
   <div class="page-content">
-    <div class="skills-layout">
-      <div>
-        <p class="group-title reveal">Technical Skills</p>
-        <div class="section-divider reveal"></div>
-        <div id="skill-bars">
-          <div class="skill-item reveal"><div class="skill-top"><span class="skill-name">🌐 HTML</span><span class="skill-pct">90%</span></div><div class="skill-bar"><div class="skill-fill" data-width="90"></div></div></div>
-          <div class="skill-item reveal d1"><div class="skill-top"><span class="skill-name">🎨 CSS</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
-          <div class="skill-item reveal d2"><div class="skill-top"><span class="skill-name">⚡ JavaScript</span><span class="skill-pct">80%</span></div><div class="skill-bar"><div class="skill-fill" data-width="80"></div></div></div>
-          <div class="skill-item reveal d3"><div class="skill-top"><span class="skill-name">⚛ React</span><span class="skill-pct">75%</span></div><div class="skill-bar"><div class="skill-fill" data-width="75"></div></div></div>
-          <div class="skill-item reveal d4"><div class="skill-top"><span class="skill-name">☕ Java</span><span class="skill-pct">70%</span></div><div class="skill-bar"><div class="skill-fill" data-width="70"></div></div></div>
-          <div class="skill-item reveal"><div class="skill-top"><span class="skill-name">🐍 Python</span><span class="skill-pct">68%</span></div><div class="skill-bar"><div class="skill-fill" data-width="68"></div></div></div>
-          <div class="skill-item reveal d1"><div class="skill-top"><span class="skill-name">🗄 Database Management</span><span class="skill-pct">65%</span></div><div class="skill-bar"><div class="skill-fill" data-width="65"></div></div></div>
+
+    <!-- ── Technical Skills Grid ── -->
+    <h2 class="soft-section-title reveal">Technical Skills</h2>
+    <div class="section-divider reveal"></div>
+
+    <div class="tech-grid">
+
+      <!-- HTML -->
+      <div class="skill-card sk-html reveal">
+        <div class="sk-icon-wrap">
+          <svg viewBox="0 0 452 520" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41.5 460L0 0h451l-41.5 460-184.2 51z" fill="#E34F26"/>
+            <path d="M226 472l149-41.5 35.4-396H226z" fill="#EF652A"/>
+            <path d="M226 208h-75l-5-58h80V94H94l13 150h119zm0 124l-1.4.4-60.7-16.4-3.9-44H94l7.7 86 124.3 34.5z" fill="#fff"/>
+            <path d="M226 208v56h70l-6.6 74-63.4 17v58l116.2-32.2L239 94h-13v58h70.4l-5 56z" fill="#fff" opacity=".9"/>
+          </svg>
         </div>
+        <div class="sk-name">HTML</div>
+        <div class="sk-divider"></div>
+        <div class="sk-desc">Structuring modern web pages</div>
       </div>
-      <div>
-        <p class="group-title reveal">Soft Skills</p>
-        <div class="section-divider reveal"></div>
-        <div class="soft-grid">
-          <div class="soft-card reveal"><span class="s-icon">🤝</span><div><div class="s-name">Collaboration</div><div class="s-desc">Working within agile cross-functional teams</div></div></div>
-          <div class="soft-card reveal d1"><span class="s-icon">💬</span><div><div class="s-name">Communication</div><div class="s-desc">Conveying technical ideas clearly</div></div></div>
-          <div class="soft-card reveal d2"><span class="s-icon">🧩</span><div><div class="s-name">Problem Solving</div><div class="s-desc">Breaking complex issues into steps</div></div></div>
-          <div class="soft-card reveal d3"><span class="s-icon">⏰</span><div><div class="s-name">Time Management</div><div class="s-desc">Prioritising tasks and meeting deadlines</div></div></div>
-          <div class="soft-card reveal d4"><span class="s-icon">🔄</span><div><div class="s-name">Adaptability</div><div class="s-desc">Quickly picking up new tools and workflows</div></div></div>
+
+      <!-- CSS -->
+      <div class="skill-card sk-css reveal d1">
+        <div class="sk-icon-wrap">
+          <svg viewBox="0 0 452 520" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41.5 460L0 0h451l-41.5 460-184.2 51z" fill="#264DE4"/>
+            <path d="M226 472l149-41.5 35.4-396H226z" fill="#2965F1"/>
+            <path d="M226 307l-63-17-4-46H94l8 89 124 34v-60zm5-113h70l-3 44-67 18v59l122-34 9-99H231z" fill="#fff"/>
+            <path d="M226 208h-80l5 57h75zm0-114H99l5 58h122z" fill="#ebebeb"/>
+            <path d="M226 265v-57h-75l5 57zm0 103v-61l-1 .3-63-17v58z" fill="#ebebeb" opacity=".8"/>
+            <path d="M226 208v57h68l-6 57-62 17v61l116-32-7-102h-69l4-58z" fill="#fff"/>
+            <path d="M226 94v58h122l-5-58z" fill="#fff"/>
+          </svg>
         </div>
+        <div class="sk-name">CSS</div>
+        <div class="sk-divider"></div>
+        <div class="sk-desc">Styling beautiful user interfaces</div>
       </div>
+
+      <!-- JavaScript -->
+      <div class="skill-card sk-js reveal d2">
+        <div class="sk-icon-wrap">
+          <svg viewBox="0 0 630 630" xmlns="http://www.w3.org/2000/svg">
+            <rect width="630" height="630" fill="#F7DF1E" rx="40"/>
+            <path d="M423 492c11 18 26 31 52 31 22 0 36-11 36-26 0-18-14-24-38-34l-13-6c-38-16-63-36-63-79 0-39 30-69 77-69 33 0 57 12 74 42l-41 26c-9-16-18-22-33-22-15 0-25 10-25 22 0 15 10 22 32 31l13 6c44 19 70 38 70 82 0 47-37 73-87 73-49 0-80-23-96-54zm-189 4c8 14 15 26 32 26 16 0 27-6 27-30V280h52v214c0 49-29 72-71 72-38 0-60-20-71-44z"/>
+          </svg>
+        </div>
+        <div class="sk-name">JavaScript</div>
+        <div class="sk-divider"></div>
+        <div class="sk-desc">Adding interactivity and dynamic behavior</div>
+      </div>
+
+      <!-- React -->
+      <div class="skill-card sk-react reveal d3">
+        <div class="sk-icon-wrap">
+          <svg viewBox="-11.5 -10.23 23 20.46" xmlns="http://www.w3.org/2000/svg">
+            <circle r="2.05" fill="#61DAFB"/>
+            <g stroke="#61DAFB" stroke-width="1" fill="none">
+              <ellipse rx="11" ry="4.2"/>
+              <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+              <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+            </g>
+          </svg>
+        </div>
+        <div class="sk-name">React</div>
+        <div class="sk-divider"></div>
+        <div class="sk-desc">Building component-based user interfaces</div>
+      </div>
+
+      <!-- Java -->
+      <div class="skill-card sk-java reveal">
+        <div class="sk-icon-wrap">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M37 68s-3 1.7 2 2.3c6.3.7 9.5.6 16.4-.7 0 0 1.8 1.1 4.3 2.1-15.3 6.5-34.6-.4-22.7-3.7z" fill="#E76F00"/>
+            <path d="M34.5 58s-3.3 2.5 1.7 3c6.4.7 11.4.7 20.1-.9 0 0 1.3 1.3 3.2 2C42.8 68 23.5 63 34.5 58z" fill="#E76F00"/>
+            <path d="M49 43.5c3.6 4.2-1 8-1 8s9.2-4.7 5-10.6c-3.9-5.5-6.9-8.2 9.3-17.5 0 0-25.5 6.4-13.3 20.1z" fill="#E76F00"/>
+            <path d="M68.5 74.4s2.3 1.9-2.5 3.4c-9.2 2.8-38.3 3.6-46.3.1-2.9-1.3 2.5-3 4.2-3.4 1.8-.4 2.8-.3 2.8-.3-3.2-2.3-20.8 4.4-9 6.3 32.4 5.2 59.1-2.4 50.8-6.1z" fill="#E76F00"/>
+            <path d="M38.5 48s-14.6 3.5-5.2 4.7c4 .5 11.9.4 19.3-.2 6-.5 12.1-1.6 12.1-1.6s-2.1.9-3.6 2C46 56 22.6 54 30.2 51c3-1.1 8.3-3 8.3-3z" fill="#E76F00"/>
+            <path d="M63.5 64c15.3-8 8.2-15.6 3.3-14.6-.9.3-1.4.5-1.4.5s.4-.6 1-.8c7.9-2.8 13.9 8.2-3.1 12.5.1 0 .1-.1.2-.2-.1.1 0 .6 0 .6z" fill="#E76F00"/>
+            <path d="M53 0s8.4 8.4-8 21.3c-13.1 10.3-3 16.2 0 22.9-7.6-6.9-13.2-12.9-9.5-18.6C41 17.6 56.1 13.7 53 0z" fill="#E76F00"/>
+            <path d="M40.5 83c14.7.9 37.3-.5 37.8-7.4 0 0-1 2.6-12.2 4.7-12.6 2.3-28.2 2-37.5.6 0 0 1.9 1.6 11.9 2.1z" fill="#E76F00"/>
+          </svg>
+        </div>
+        <div class="sk-name">Java</div>
+        <div class="sk-divider"></div>
+        <div class="sk-desc">Object-oriented programming</div>
+      </div>
+
+      <!-- Python -->
+      <div class="skill-card sk-python reveal d1">
+        <div class="sk-icon-wrap">
+          <svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="pyBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#387EB8"/><stop offset="100%" stop-color="#2E6B9E"/>
+              </linearGradient>
+              <linearGradient id="pyYellow" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFE052"/><stop offset="100%" stop-color="#FFC331"/>
+              </linearGradient>
+            </defs>
+            <path d="M54.4 5C38 5 39 12.3 39 12.3V26h16v4H24s-13.7-1.6-13.7 18.4 12 19.6 12 19.6h7.1V58s-.4-12 11.8-12h20.4s11.4.2 11.4-11V16.1S74.5 5 54.4 5zm-10 9.5a3.3 3.3 0 110 6.6 3.3 3.3 0 010-6.6z" fill="url(#pyBlue)"/>
+            <path d="M55.7 105.1c16.4 0 15.4-7.3 15.4-7.3V84h-16v-4H75s13.7 1.6 13.7-18.4-12-19.6-12-19.6H69.6V52s.4 12-11.8 12H37.4S26 63.8 26 75v26.1s-1.6 4 29.7 4zm10-9.5a3.3 3.3 0 110-6.6 3.3 3.3 0 010 6.6z" fill="url(#pyYellow)"/>
+          </svg>
+        </div>
+        <div class="sk-name">Python</div>
+        <div class="sk-divider"></div>
+        <div class="sk-desc">Writing efficient and clean code</div>
+      </div>
+
+      <!-- Database Management -->
+      <div class="skill-card sk-db reveal d2">
+        <div class="sk-icon-wrap">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="22" rx="38" ry="13" fill="#A78BFA" opacity=".9"/>
+            <path d="M12 22v18c0 7 17 13 38 13s38-6 38-13V22c0 7-17 13-38 13S12 29 12 22z" fill="#7C3AED" opacity=".85"/>
+            <path d="M12 40v18c0 7 17 13 38 13s38-6 38-13V40c0 7-17 13-38 13S12 47 12 40z" fill="#6D28D9" opacity=".85"/>
+            <path d="M12 58v18c0 7 17 13 38 13s38-6 38-13V58c0 7-17 13-38 13S12 65 12 58z" fill="#5B21B6" opacity=".9"/>
+          </svg>
+        </div>
+        <div class="sk-name">Database Management</div>
+        <div class="sk-divider"></div>
+        <div class="sk-desc">Storing, managing and retrieving data</div>
+      </div>
+
+      <!-- Git & GitHub -->
+      <div class="skill-card sk-git reveal d3">
+        <div class="sk-icon-wrap" style="gap:6px;flex-direction:row;width:auto;padding:0 8px;">
+          <!-- Git logo -->
+          <svg viewBox="0 0 92 92" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px;">
+            <path d="M90.2 41.7L50.3 1.8a6 6 0 00-8.5 0L33.5 10l10.7 10.7a7.1 7.1 0 019 9.1l10.3 10.3a7.1 7.1 0 11-4.3 4.3L49.2 34.4v26a7.1 7.1 0 11-5.8-.5V33.9a7.1 7.1 0 01-3.8-9.4L29 14.2 1.8 41.4a6 6 0 000 8.5l39.9 39.9a6 6 0 008.5 0L90.2 50.2a6 6 0 000-8.5z" fill="#F05133"/>
+          </svg>
+          <!-- GitHub mark -->
+          <svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;">
+            <path d="M49 1a49 49 0 00-15.5 95.5c2.5.5 3.4-1 3.4-2.3v-8c-13.7 3-16.6-6.6-16.6-6.6-2.2-5.7-5.5-7.2-5.5-7.2-4.5-3 .3-3 .3-3 5 .3 7.5 5 7.5 5 4.4 7.5 11.5 5.3 14.3 4 .4-3.2 1.7-5.3 3.1-6.5-10.9-1.2-22.4-5.5-22.4-24.3a19 19 0 015-13.2c-.5-1.3-2.2-6.3.5-13 0 0 4.1-1.3 13.4 5a46 46 0 0124.4 0c9.3-6.3 13.3-5 13.3-5 2.8 6.8 1 11.8.5 13a19 19 0 015 13.2c0 18.9-11.5 23-22.5 24.2 1.8 1.5 3.3 4.6 3.3 9.3v13.8c0 1.3.9 2.8 3.4 2.3A49 49 0 0049 1z" fill="#ccc"/>
+          </svg>
+        </div>
+        <div class="sk-name">Git &amp; GitHub</div>
+        <div class="sk-divider"></div>
+        <div class="sk-desc">Version control and collaboration</div>
+      </div>
+
+    </div><!-- /tech-grid -->
+
+
+    <!-- ── Soft Skills ── -->
+    <h2 class="soft-section-title reveal">Soft Skills</h2>
+    <div class="section-divider reveal"></div>
+    <div class="soft-pills">
+      <div class="soft-pill reveal">    <span class="sp-icon">🤝</span> Collaboration</div>
+      <div class="soft-pill reveal d1"> <span class="sp-icon">💬</span> Communication</div>
+      <div class="soft-pill reveal d2"> <span class="sp-icon">🧩</span> Problem Solving</div>
+      <div class="soft-pill reveal d3"> <span class="sp-icon">⏰</span> Time Management</div>
+      <div class="soft-pill reveal d4"> <span class="sp-icon">🔄</span> Adaptability</div>
+      <div class="soft-pill reveal">    <span class="sp-icon">🎯</span> Attention to Detail</div>
+      <div class="soft-pill reveal d1"> <span class="sp-icon">💡</span> Creative Thinking</div>
+      <div class="soft-pill reveal d2"> <span class="sp-icon">📚</span> Continuous Learning</div>
     </div>
-    <h2 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.4rem;margin-top:3.5rem;" class="reveal">Tools & Environments</h2>
+
+
+    <!-- ── Tools ── -->
+    <h2 class="soft-section-title reveal" style="margin-top:3.5rem;">Tools &amp; Environments</h2>
     <div class="section-divider reveal"></div>
     <div class="tools-strip">
-      <div class="tool-pill reveal"><span class="tp-icon">🐙</span><span class="tp-name">Git</span></div>
+      <div class="tool-pill reveal">   <span class="tp-icon">🐙</span><span class="tp-name">Git</span></div>
       <div class="tool-pill reveal d1"><span class="tp-icon">💻</span><span class="tp-name">VS Code</span></div>
       <div class="tool-pill reveal d2"><span class="tp-icon">⚡</span><span class="tp-name">Vite</span></div>
       <div class="tool-pill reveal d3"><span class="tp-icon">🎨</span><span class="tp-name">Figma</span></div>
       <div class="tool-pill reveal d4"><span class="tp-icon">🐧</span><span class="tp-name">Linux</span></div>
-      <div class="tool-pill reveal"><span class="tp-icon">📮</span><span class="tp-name">Postman</span></div>
+      <div class="tool-pill reveal">   <span class="tp-icon">📮</span><span class="tp-name">Postman</span></div>
       <div class="tool-pill reveal d1"><span class="tp-icon">🐋</span><span class="tp-name">Docker</span></div>
       <div class="tool-pill reveal d2"><span class="tp-icon">☁️</span><span class="tp-name">Netlify</span></div>
     </div>
-  </div>
-</div>
+
+  </div><!-- /page-content -->
+</div><!-- /page -->
+
 <footer>
   <div class="footer-socials">
-    <a href="https://github.com/vamsihanumanthu" target="_blank" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
-    <a href="https://linkedin.com/in/vamsihanumanthu" target="_blank" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
-    <a href="mailto:vamsi@example.com" class="social-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+    <a href="https://github.com/vamsihanumanthu" target="_blank" class="social-icon">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+    </a>
+    <a href="https://linkedin.com/in/vamsihanumanthu" target="_blank" class="social-icon">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="mailto:vamsi@example.com" class="social-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
   </div>
   <p class="footer-text">Built by <span class="footer-name">Vamsi Hanumanthu</span> · Thank you for visiting.</p>
 </footer>
-<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
 <script>
-  const _h=document.documentElement,_s=localStorage.getItem('vh-theme')||'dark';
-  _h.setAttribute('data-theme',_s);const _tb=document.getElementById('theme-toggle');
+  const _h=document.documentElement, _s=localStorage.getItem('vh-theme')||'dark';
+  _h.setAttribute('data-theme',_s);
+  const _tb=document.getElementById('theme-toggle');
   _tb.textContent=_s==='dark'?'☀ Light':'🌙 Dark';
-  _tb.addEventListener('click',()=>{const n=_h.getAttribute('data-theme')==='dark'?'light':'dark';_h.setAttribute('data-theme',n);localStorage.setItem('vh-theme',n);_tb.textContent=n==='dark'?'☀ Light':'🌙 Dark';});
-  document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('nav-links').classList.toggle('open'));
+  _tb.addEventListener('click',()=>{
+    const n=_h.getAttribute('data-theme')==='dark'?'light':'dark';
+    _h.setAttribute('data-theme',n);
+    localStorage.setItem('vh-theme',n);
+    _tb.textContent=n==='dark'?'☀ Light':'🌙 Dark';
+  });
+  document.getElementById('hamburger').addEventListener('click',()=>
+    document.getElementById('nav-links').classList.toggle('open'));
   const _btt=document.getElementById('back-to-top');
   window.addEventListener('scroll',()=>_btt.classList.toggle('visible',window.scrollY>300));
-  const ro=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.1});
+  const ro=new IntersectionObserver(
+    e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-  // bars
-  const bo=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.querySelectorAll('.skill-fill').forEach(f=>f.style.width=f.dataset.width+'%');bo.unobserve(x.target);}});},{threshold:0.2});
-  const sb=document.getElementById('skill-bars');if(sb)bo.observe(sb);
-  setTimeout(()=>sb&&sb.querySelectorAll('.skill-fill').forEach(f=>f.style.width=f.dataset.width+'%'),500);
 </script>
+<script src="parallax.js"></script>
 </body>
 </html>
