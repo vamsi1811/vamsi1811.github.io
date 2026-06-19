@@ -88,8 +88,8 @@
     });
 
     /* 6. Timeline line grows on scroll */
-    const tlLine = document.querySelector('.timeline::before');
-    // done via CSS custom property below
+    // This was using a pseudo-element selector and can break the script in some browsers.
+    // The timeline line animation is handled entirely in CSS, so no JS selector is needed here.
 
     /* 7. Skill bar glow pulses with scroll position */
     document.querySelectorAll('.skill-fill').forEach(fill => {
