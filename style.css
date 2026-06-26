@@ -312,24 +312,25 @@ nav {
   padding: 0 0.375rem;
 }
 
+.sk-icon-wrap.sk-icon-combo {
+  width: auto;
+  min-width: 100px;
+  padding: 0.8rem 0.9rem;
+  justify-content: center;
+}
+
 .skill-card:hover .sk-icon-wrap { transform: scale(1.12) rotate(-4deg); }
 
 .sk-icon-wrap svg,
 .sk-icon-wrap img,
 .combo-icon {
   width: 40px; height: 40px;
+  max-width: 100%; max-height: 100%;
   transition: width 0.4s ease, height 0.4s ease;
 }
 
-.skill-card:hover .sk-divider { width: 48px; }
-
-.sk-desc {
-  font-size: 0.9rem; color: var(--muted);
-  line-height: 1.6;
-  position: relative; z-index: 1;
-}
-
-.sk-html { --card-glow: rgba(227,79,38,0.22); --card-border: rgba(227,79,38,0.45); --card-accent: #E34F26; }
+.sk-icon-wrap.sk-icon-combo .combo-icon {
+  width: 34px; height: 34px;
 .sk-html .sk-icon-wrap { background: rgba(227,79,38,0.12); border: 1px solid rgba(227,79,38,0.2); }
 
 .sk-css { --card-glow: rgba(38,77,228,0.22); --card-border: rgba(38,77,228,0.45); --card-accent: #264DE4; }
